@@ -1,37 +1,30 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Playercontrollers : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public Animator animator;
     public float speed;
     public float jump;
-
     private Rigidbody2D rdb2;
-    private void Awake()
+    private float horizontal;
+
+    private float vertical;
+    private void Start()
     {
         rdb2 = gameObject.GetComponent<Rigidbody2D>();
+        
     }
     private void Update()
-    {
+    {   
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Jump");
         
-        float horizontal = Input.GetAxisRaw ("Horizontal");
-        float vertical = Input.GetAxisRaw("Jump");
-
         PlayerMovementAnimation(horizontal, vertical);
         CharacterMovement(horizontal, vertical);
-
-        if(Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            animator.SetBool("Crouch", true);
-        }
-        else if(Input.GetKeyUp(KeyCode.LeftControl))
-        {
-            animator.SetBool("Crouch", false);
-        }
+        Crouch();
     }
 
     private void CharacterMovement(float horizontal, float vertical)
@@ -44,14 +37,14 @@ public class Playercontrollers : MonoBehaviour
         {
             rdb2.AddForce(new Vector2(0f, jump), ForceMode2D.Force);
         }
-
-
     }
+    
     private void PlayerMovementAnimation(float horizontal, float vertical)
     {
-        Vector3 scale = transform.localScale;
         animator.SetFloat("Speed",Mathf.Abs(horizontal));
-         
+
+        Vector3 scale = transform.localScale;
+        
         if(horizontal < 0)
         {
             scale.x = -1f * Mathf.Abs(scale.x);
@@ -60,7 +53,7 @@ public class Playercontrollers : MonoBehaviour
         {
             scale.x = Mathf.Abs(scale.x);
         }
-
+       
         if(vertical > 0)
         {
             animator.SetBool("Jump", true);
@@ -68,12 +61,22 @@ public class Playercontrollers : MonoBehaviour
         else
         {
             animator.SetBool("Jump", false);
-        }
-
+        }  
+        
         transform.localScale = scale;
     }
         
-    
+    private void Crouch()
+    {
+        if(Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            animator.SetBool("Crouch", true);
+        }
+        else if(Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            animator.SetBool("Crouch", false);
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
