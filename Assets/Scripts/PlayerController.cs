@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 
 public class PlayerController : MonoBehaviour
@@ -8,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public float speed;
     public float jump;
+
+    public ScoreController scoreController;
     private Rigidbody2D rdb2;
     private float horizontal;
 
@@ -15,7 +18,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rdb2 = gameObject.GetComponent<Rigidbody2D>();
-        
     }
     private void Update()
     {   
@@ -27,6 +29,11 @@ public class PlayerController : MonoBehaviour
         Crouch();
     }
 
+    public void PickUpKey()
+    {
+        Debug.Log("Player has pickedup key!");
+        scoreController.IncrementScore(10);
+    }
     private void CharacterMovement(float horizontal, float vertical)
     {
         Vector3 position = transform.position;
@@ -82,7 +89,4 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("OnCollisionEnter2D : " + collision.gameObject.name);
     }
-
-   
-    
 }

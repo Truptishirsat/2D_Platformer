@@ -251,3 +251,4 @@ MonoBehaviour:
   animator: {fileID: 6079282926887086743}
   speed: 9
   jump: 100
+  scoreController: {fileID: 0}
