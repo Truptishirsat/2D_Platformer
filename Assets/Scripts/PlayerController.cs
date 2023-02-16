@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 
@@ -85,8 +86,31 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+   /* private void OnCollisionStay2D(Collision2D collision)
     {
-        Debug.Log("OnCollisionEnter2D : " + collision.gameObject.name);
+        if(collision.gameObject.tag == "ChomperEnemy")
+        {
+            HealthController.health--;
+            if(HealthController.health <= 0)
+            {
+                Debug.Log("Player Dead !");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        }
+    }*/
+
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if(collider.gameObject.tag == "ChomperEnemy")
+        {
+            HealthController.health--;
+            if(HealthController.health <= 0)
+            {
+                Debug.Log("Player Dead !");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        }
     }
+    
 }
