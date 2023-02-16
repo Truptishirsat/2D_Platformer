@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public float jump;
 
     public ScoreController scoreController;
+    public GameOverController gameOverController;
     private Rigidbody2D rdb2;
     private float horizontal;
 
@@ -86,29 +87,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-   /* private void OnCollisionStay2D(Collision2D collision)
+  
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "ChomperEnemy")
+        if(collision.gameObject.tag == "ChomperEnemy"   || collision.gameObject.tag == "SpitterEnemy")
         {
             HealthController.health--;
             if(HealthController.health <= 0)
             {
-                Debug.Log("Player Dead !");
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
-        }
-    }*/
-
-
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if(collider.gameObject.tag == "ChomperEnemy")
-        {
-            HealthController.health--;
-            if(HealthController.health <= 0)
-            {
-                Debug.Log("Player Dead !");
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                gameOverController.OnPlayerDie();
+                this.enabled = false;
             }
         }
     }

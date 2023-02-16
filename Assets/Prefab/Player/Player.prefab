@@ -252,3 +252,4 @@ MonoBehaviour:
   speed: 9
   jump: 100
   scoreController: {fileID: 0}
+  gameOverController: {fileID: 0}
