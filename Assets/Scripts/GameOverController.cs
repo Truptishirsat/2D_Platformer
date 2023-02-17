@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class GameOverController : MonoBehaviour
 {
-    public Button button;
+    public Button buttonRestart;
+    public Button buttonLobby;
     private void Awake()
     {
-        button.onClick.AddListener(ReloadScene);
+        buttonRestart.onClick.AddListener(ReloadScene);
+        buttonLobby.onClick.AddListener(LoadLobby);
     }
 
     public void OnPlayerDie()
@@ -22,4 +24,12 @@ public class GameOverController : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     } 
+
+
+    private void LoadLobby()
+    {
+        gameObject.SetActive(false);
+        
+        SceneManager.LoadScene("Lobby");
+    }
 }
