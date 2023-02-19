@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class LevelOverCollider : MonoBehaviour
 {
+    public GameObject gameOver;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.GetComponent<PlayerController>() != null)
         {
             Debug.Log("Level Completed !");
+            LevelManager.Instance.MarkCurrentLevelComplete();
+            gameOver.SetActive(true);
         }
     }
 }
