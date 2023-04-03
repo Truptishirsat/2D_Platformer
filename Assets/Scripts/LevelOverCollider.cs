@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class LevelOverCollider : MonoBehaviour
 {
-    public GameObject gameOver;
+    public GameObject levelcompleteUI;
+    public PlayerController playerController;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.GetComponent<PlayerController>() != null)
         {
             Debug.Log("Level Completed !");
             LevelManager.Instance.MarkCurrentLevelComplete();
-            gameOver.SetActive(true);
+            SoundManager.Instance.Play(Sounds.LevelComplete);
+            playerController.enabled = false;
+            levelcompleteUI.SetActive(true);
+            
         }
     }
 }

@@ -37,6 +37,7 @@ public class LevelManager : MonoBehaviour
     public void MarkCurrentLevelComplete()
     {
         // set current scene to complete levelstatus
+        
         Scene currentScene = SceneManager.GetActiveScene();
         SetLevelStatus(currentScene.name, LevelStatus.Completed);
 

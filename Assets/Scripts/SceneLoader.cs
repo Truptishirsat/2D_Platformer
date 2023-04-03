@@ -28,6 +28,7 @@ public class SceneLoader : MonoBehaviour
                 break;
             
             case LevelStatus.Unlocked:
+                SoundManager.Instance.Play(Sounds.ButtonClick);
                 SceneManager.LoadScene(levelName);
                 break;
 

@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.tag == "ChomperEnemy"   || collision.gameObject.tag == "SpitterEnemy")
         {
+            SoundManager.Instance.Play(Sounds.Collisionwithenemy);
             HealthController.health--;
             if(HealthController.health <= 0)
             {

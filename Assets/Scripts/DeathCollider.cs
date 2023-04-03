@@ -10,6 +10,7 @@ public class DeathCollider : MonoBehaviour
     {
         if(collision.gameObject.GetComponent<PlayerController>() != null)
         {
+            //SoundManager.Instance.Play(Sounds.);
             gameOver.SetActive(true);
         }
     }
